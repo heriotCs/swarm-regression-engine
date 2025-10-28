@@ -9,17 +9,7 @@ from AnnPso.annPsoTrainer import ANNPSOTrainer
 
 
 def load_and_preprocess_data(filepath: str, test_size: float = 0.3, seed: int = 42):
-    """
-    Load and preprocess the concrete dataset.
     
-    Args:
-        filepath: Path to the Excel file
-        test_size: Fraction for test set
-        seed: Random seed
-        
-    Returns:
-        Tuple of (X_train, X_test, y_train, y_test, scaler)
-    """
     print("Loading concrete dataset...")
     df = pd.read_excel(filepath)
     
