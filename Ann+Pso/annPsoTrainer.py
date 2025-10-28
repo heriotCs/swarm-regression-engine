@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Optional, Tuple, Dict
-from network import NeuralNetwork
+from Ann.network import NeuralNetwork
 from annFitness import ANNFitness, ANNFitnessWithValidation
 from pso.fitness import Fitness
 from pso.pso import PSO

@@ -1,6 +1,6 @@
 import numpy as np
 from typing import Tuple
-from network import NeuralNetwork
+from Ann.network import NeuralNetwork
 
 
 class ANNFitness: # Fitness function that evaluates an ANN by unpacking PSO particle positions into network weights and computing error on training data.
