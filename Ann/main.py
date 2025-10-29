@@ -1,3 +1,4 @@
+from pathlib import Path
 import numpy as np
 from network import NeuralNetwork
 from builder import ANNBuilder, create_simple_regression_nn
@@ -110,12 +111,17 @@ def test_concrete_dataset():
     
     try:
         import pandas as pd
+
+         # point to the Dataset folder next to the project root
+        dataset_dir = Path(__file__).resolve().parent.parent / "Dataset"
+        train_path = dataset_dir / "concrete_train.csv"
+        test_path = dataset_dir / "concrete_test.csv"
         
         # load pre_processed data
         try:
-            train_df = pd.read_csv("concrete_train.csv")
-            test_df = pd.read_csv("concrete_test.csv")
-            
+            train_df = pd.read_csv(train_path)
+            test_df = pd.read_csv(test_path)
+
             X_train = train_df.iloc[:, :-1].values
             y_train = train_df.iloc[:, -1].values
             X_test = test_df.iloc[:, :-1].values
