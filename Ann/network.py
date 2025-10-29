@@ -1,8 +1,4 @@
-
 # Neural Network : Defines a multi-layer feed-forward neural network.
-
-
-
 import numpy as np
 from typing import List, Optional
 from layer import Layer
