@@ -3,7 +3,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
-
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Ann.builder import ANNBuilder
 from AnnPso.annPsoTrainer import ANNPSOTrainer
 

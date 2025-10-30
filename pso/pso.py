@@ -3,6 +3,13 @@
 from __future__ import annotations
 import numpy as np
 from typing import List, Tuple, Literal, Optional
+
+import os
+import sys
+
+# Add parent directory to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from pso.particle import Particle
 from pso.informants import Informants
 from pso.fitness import Fitness

@@ -1,7 +1,12 @@
 import numpy as np
 from typing import Tuple
-from Ann.network import NeuralNetwork
+import sys
+import os
 
+# Add parent directory to path so we can import from Ann and pso folders
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from Ann.network import NeuralNetwork
 
 class ANNFitness: # Fitness function that evaluates an ANN by unpacking PSO particle positions into network weights and computing error on training data.
     

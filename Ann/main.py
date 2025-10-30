@@ -1,7 +1,12 @@
 from pathlib import Path
 import numpy as np
-from network import NeuralNetwork
-from builder import ANNBuilder, create_simple_regression_nn
+
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from Ann.network import NeuralNetwork
+from Ann.builder import ANNBuilder, create_simple_regression_nn
 
 # test basic forward propagation functionality
 def test_basic_functionality():

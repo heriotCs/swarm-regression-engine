@@ -2,7 +2,12 @@
 
 import numpy as np
 from typing import Optional
-from activation import get_activation
+
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from Ann.activation import get_activation
 
 
 class Layer:

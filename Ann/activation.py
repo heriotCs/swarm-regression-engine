@@ -3,6 +3,12 @@
 import numpy as np
 from typing import Callable
 
+import sys
+import os
+
+# parent directory to Python path so we can import pso as a package
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 # define sigmoid activation function
 def sigmoid(x: np.ndarray) -> np.ndarray:
     x_clip = np.clip(x, -500, 500)

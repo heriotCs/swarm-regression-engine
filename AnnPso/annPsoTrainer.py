@@ -1,7 +1,10 @@
 import numpy as np
 from typing import Optional, Tuple, Dict
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Ann.network import NeuralNetwork
-from annFitness import ANNFitness, ANNFitnessWithValidation
+from AnnPso.annFitness import ANNFitness, ANNFitnessWithValidation
 from pso.fitness import Fitness
 from pso.pso import PSO
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score

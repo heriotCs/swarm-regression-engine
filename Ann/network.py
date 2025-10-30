@@ -1,7 +1,10 @@
 # Neural Network : Defines a multi-layer feed-forward neural network.
 import numpy as np
 from typing import List, Optional
-from layer import Layer
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from Ann.layer import Layer
 
 
 class NeuralNetwork:
