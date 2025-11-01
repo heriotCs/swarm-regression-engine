@@ -9,6 +9,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from Ann.activation import get_activation
 
+# Guard rail to keep PSO from pushing the network into NaN/Inf territory.
+# Values far outside this band deteriorate training anyway, so we clip inputs
+# and weights to a large but finite range before each matmul.
+_SAFE_CLIP_VALUE = 1e6
+
 
 class Layer:
     
@@ -59,8 +64,29 @@ class Layer:
             original_1d = True
 
         # Linear transformation: z = x @ W^T + b
-        z = x @ self.W.T + self.b  # [batch, out_dim]
-        
+        safe_x = np.clip(
+            np.nan_to_num(x, nan=0.0, posinf=_SAFE_CLIP_VALUE, neginf=-_SAFE_CLIP_VALUE),
+            -_SAFE_CLIP_VALUE,
+            _SAFE_CLIP_VALUE,
+        )
+        safe_W = np.clip(
+            np.nan_to_num(
+                self.W, nan=0.0, posinf=_SAFE_CLIP_VALUE, neginf=-_SAFE_CLIP_VALUE
+            ),
+            -_SAFE_CLIP_VALUE,
+            _SAFE_CLIP_VALUE,
+        )
+        safe_b = np.clip(
+            np.nan_to_num(
+                self.b, nan=0.0, posinf=_SAFE_CLIP_VALUE, neginf=-_SAFE_CLIP_VALUE
+            ),
+            -_SAFE_CLIP_VALUE,
+            _SAFE_CLIP_VALUE,
+        )
+
+        with np.errstate(over="ignore", under="ignore", invalid="ignore", divide="ignore"):
+            z = safe_x @ safe_W.T + safe_b  # [batch, out_dim]
+
         # Apply activation function
         a = self.activation_fn(z)
 

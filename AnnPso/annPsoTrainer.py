@@ -194,3 +194,32 @@ class ANNPSOTrainer:
         print(f"  MAE:  {results['mae']:.4f}")
         print(f"  R²:   {results['r2']:.4f}")
         print("-" * 40)
+
+if __name__ == "__main__":
+    from Ann.network import NeuralNetwork
+    import numpy as np
+
+    # Create a dummy neural network for testing
+    network = NeuralNetwork([8, 10, 1], activations=["relu", "linear"])
+
+    # Generate some random training and validation data
+    X_train = np.random.rand(100, 8)
+    y_train = np.random.rand(100, 1)
+    X_val = np.random.rand(20, 8)
+    y_val = np.random.rand(20, 1)
+
+    # Create trainer instance
+    trainer = ANNPSOTrainer(
+        network=network,
+        X_train=X_train,
+        y_train=y_train,
+        X_val=X_val,
+        y_val=y_val,
+        metric="mse"
+    )
+
+    # Train the network
+    best_weights, best_fitness = trainer.train(swarm_size=10, max_iters=5)
+
+    # Evaluate on validation data
+    trainer.print_evaluation(X_val, y_val, dataset_name="Validation")

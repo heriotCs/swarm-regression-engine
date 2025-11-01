@@ -110,7 +110,7 @@ def train_deep_network(X_train, X_test, y_train, y_test):
     # Train with PSO (more particles for more complex network)
     best_weights, best_fitness = trainer.train(
         swarm_size=50,
-        max_iters=150,
+        max_iters=100,
         weight_range=3.0,
         chi=0.7298,
         c1=1.8,
