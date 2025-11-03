@@ -16,9 +16,6 @@ from src.AnnPso.annPsoTrainer import ANNPSOTrainer
 # Utility helpers
 # ==========================================================
 def load_and_preprocess_data(path="Concrete_Data.xls", test_size=0.3, seed=42):
-    if path is None:
-        # go up one level to project root, then into Dataset
-        path = Path(__file__).resolve().parent.parent / "Dataset" / "Concrete_Data.xls"
     df = pd.read_excel(path)
     X, y = df.iloc[:, :-1].values, df.iloc[:, -1].values
     Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=test_size, random_state=seed)
