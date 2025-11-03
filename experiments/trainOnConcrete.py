@@ -1,20 +1,24 @@
 import numpy as np, pandas as pd, matplotlib.pyplot as plt, os, sys, warnings
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from pathlib import Path 
 warnings.filterwarnings("ignore")
 
 # -------------------------------------------------------------------
 # Import project modules
 # -------------------------------------------------------------------
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Ann.builder import ANNBuilder
-from AnnPso.annPsoTrainer import ANNPSOTrainer
+from src.Ann.builder import ANNBuilder
+from src.AnnPso.annPsoTrainer import ANNPSOTrainer
 # -------------------------------------------------------------------
 
 # ==========================================================
 # Utility helpers
 # ==========================================================
 def load_and_preprocess_data(path="Concrete_Data.xls", test_size=0.3, seed=42):
+    if path is None:
+        # go up one level to project root, then into Dataset
+        path = Path(__file__).resolve().parent.parent / "Dataset" / "Concrete_Data.xls"
     df = pd.read_excel(path)
     X, y = df.iloc[:, :-1].values, df.iloc[:, -1].values
     Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=test_size, random_state=seed)

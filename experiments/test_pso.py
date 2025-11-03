@@ -5,8 +5,8 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
-from pso.fitness import Fitness
-from pso.pso import PSO
+from src.pso.fitness import Fitness
+from src.pso.pso import PSO
 
 
 # Sphere benchmark (min at 0)

@@ -5,7 +5,7 @@ import os
 # Add parent directory to path so we can import from pso or Ann modules easily
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from network import NeuralNetwork
+from .network import NeuralNetwork
 
 
 class ANNBuilder:
