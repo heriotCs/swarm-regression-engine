@@ -85,19 +85,19 @@ trainer.train(
 - **network.py**: Core neural network with configurable layers and forward propagation
 - **layer.py**: Layer operations (linear transformation + activation)
 - **activation.py**: Implemented activation functions:
-  - ✅ Logistic (Sigmoid)
-  - ✅ ReLU
-  - ✅ Tanh
-  - ✅ Linear (for output layer)
+  - Logistic (Sigmoid)
+  - ReLU
+  - Tanh
+  - Linear (for output layer)
 - **builder.py**: Factory patterns for easy network construction
 
 ### Task 2: PSO Implementation (`pso/`)
 - **pso.py**: Full Algorithm 39 from "Essentials of Metaheuristics" with:
-  - ✅ Informant-based topology (lines clearly commented with algorithm line numbers)
-  - ✅ Constriction factor (χ = 0.7298)
-  - ✅ Multiple boundary handling modes (reflect, clamp, wrap)
-  - ✅ Parameter scheduling (c1, c2 linear decay)
-  - ✅ Stagnation detection and recovery
+  - Informant-based topology (lines clearly commented with algorithm line numbers)
+  - Constriction factor (χ = 0.7298)
+  - Multiple boundary handling modes (reflect, clamp, wrap)
+  - Parameter scheduling (c1, c2 linear decay)
+  - Stagnation detection and recovery
 - **particle.py**: Individual particle with position/velocity updates
 - **informants.py**: Topology implementations (random, ring, fully_informed)
 - **fitness.py**: Fitness function wrapper for minimization/maximization
@@ -201,7 +201,7 @@ This project was developed with assistance from GitHub Copilot for:
 
 ---
 
-## 📚 Key References
+## Key References
 
 1. Luke, S. (2013). *Essentials of Metaheuristics* (Section 3.5: PSO Algorithm 39)
 2. Kennedy, J., & Eberhart, R. (1995). "Particle swarm optimization"
