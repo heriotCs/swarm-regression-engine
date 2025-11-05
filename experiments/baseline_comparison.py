@@ -18,10 +18,10 @@ warnings.filterwarnings("ignore", category=ConvergenceWarning)
 # ✅ Add project root to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from Ann.builder import ANNBuilder
-from AnnPso.annPsoTrainer import ANNPSOTrainer
-from pso.pso import PSO
-from pso.fitness import Fitness
+from src.Ann.builder import ANNBuilder
+from src.AnnPso.annPsoTrainer import ANNPSOTrainer
+from src.pso.pso import PSO
+from src.pso.fitness import Fitness
 
 
 # ==========================================================
