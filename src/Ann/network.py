@@ -1,4 +1,7 @@
-# Neural Network : Defines a multi-layer feed-forward neural network.
+# Neural Network: Defines a multi-layer feed-forward neural network.
+# This class holds the overall ANN structure and handles layer creation,
+# forward propagation, parameter counting, and simple printing utilities.
+
 import numpy as np
 from typing import List, Optional
 import sys
@@ -15,48 +18,63 @@ class NeuralNetwork:
         activations: List[str], 
         seed: Optional[int] = None
     ):
-        
-        # Validation
-        if len(architecture) < 2: # architecture must have at least input and output sizes 
+        """
+        architecture: list of layer sizes, e.g. [8, 10, 1]
+        activations: list of activation names for each layer except input
+        """
+
+        # Basic sanity checks to prevent misconfigured networks
+        if len(architecture) < 2:
             raise ValueError(
-                "Architecture must have at least input and output sizes "
-                "e.g [8, 1]"
+                "Architecture must include at least input and output sizes "
+                "(e.g. [8, 1])."
             )
         if len(activations) != len(architecture) - 1:
             raise ValueError(
-                f"Need one activation per layer except input. "
-                f"Got {len(activations)} activations for "
-                f"{len(architecture)-1} layers."
+                f"Expected {len(architecture)-1} activation functions, "
+                f"but got {len(activations)}."
             )
 
         self.architecture = architecture
         self.activations = [a.lower() for a in activations]
+
+        # RNG is stored so all layers share the same seed if provided
         self.rng = np.random.default_rng(seed)
 
-        # Build layers
+        # -------------------------------------------------------------
+        # Build each layer using the Layer class
+        # -------------------------------------------------------------
         self.layers: List[Layer] = []
         for in_size, out_size, act in zip(
-            architecture[:-1], 
-            architecture[1:], 
+            architecture[:-1],
+            architecture[1:],
             self.activations
         ):
             self.layers.append(
                 Layer(in_size, out_size, act, rng=self.rng)
             )
 
+    # -------------------------------------------------------------
+    # Forward pass through the entire network
+    # -------------------------------------------------------------
     def forward(self, x: np.ndarray) -> np.ndarray:
-    
-        # Forward propagation through all layers.
-        
+        """
+        Apply each layer sequentially. The Layer class handles
+        activation functions and numerical clipping internally.
+        """
         out = x
         for layer in self.layers:
             out = layer.forward(out)
         return out
 
+    # Allow the network to be called like a function: nn(x)
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
 
-    def summary(self) -> None: # prints a summary of the network architechture
+    # -------------------------------------------------------------
+    # Simple printed summary for debugging/inspection
+    # -------------------------------------------------------------
+    def summary(self) -> None:
         print("=" * 50)
         print("Neural Network Summary")
         print("=" * 50)
@@ -65,11 +83,16 @@ class NeuralNetwork:
         print("=" * 50)
         print(f"Total layers (excluding input): {len(self.layers)}")
         print("=" * 50)
-    
-    def get_num_parameters(self) -> int: # Calculate total number of trainable parameters.
-        
+
+    # -------------------------------------------------------------
+    # Count total trainable parameters
+    # -------------------------------------------------------------
+    def get_num_parameters(self) -> int:
+        """
+        Returns the total number of parameters (weights + biases)
+        which is what PSO optimises over.
+        """
         total = 0
         for layer in self.layers:
-            # Weights + biases
             total += layer.W.size + layer.b.size
         return total
