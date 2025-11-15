@@ -10,9 +10,7 @@ from src.Ann.network import NeuralNetwork
 from src.Ann.builder import ANNBuilder, create_simple_regression_nn
 
 
-# -------------------------------------------------------------
 # TEST 1: Basic forward propagation and shape checks
-# -------------------------------------------------------------
 def test_basic_functionality():
     print("TEST 1: Basic Functionality")
     print("="*60)
@@ -38,10 +36,7 @@ def test_basic_functionality():
     print(f"\nBatch output shape: {y_batch.shape}")
     print(f"First 3 predictions: {y_batch[:3].flatten()}")
 
-
-# -------------------------------------------------------------
 # TEST 2: Making sure ANNBuilder creates networks correctly
-# -------------------------------------------------------------
 def test_builder_patterns():
     print("\n" + "="*60)
     print("TEST 2: ANNBuilder Patterns")
@@ -80,10 +75,7 @@ def test_builder_patterns():
     )
     nn4.summary()
 
-
-# -------------------------------------------------------------
 # TEST 3: Confirming different activation functions behave correctly
-# -------------------------------------------------------------
 def test_different_activations():
     
     print("\n" + "="*60)
@@ -106,9 +98,7 @@ def test_different_activations():
         print(f"\nActivations {act}: Output = {output[0]:.4f}")
 
 
-# -------------------------------------------------------------
 # TEST 4: Ensure the network handles variable batch sizes
-# -------------------------------------------------------------
 def test_batch_processing():
     print("\n" + "="*60)
     print("TEST 4: Batch Processing")
@@ -122,10 +112,7 @@ def test_batch_processing():
         y_batch = nn(x_batch)
         print(f"\nBatch size {batch_size:3d}: Output shape = {y_batch.shape}")
 
-
-# -------------------------------------------------------------
 # TEST 5: Concrete dataset loading + forward pass sanity check
-# -------------------------------------------------------------
 def test_concrete_dataset():
     print("\n" + "="*60)
     print("TEST 5: Concrete Dataset Example")
@@ -176,10 +163,7 @@ def test_concrete_dataset():
     except ImportError:
         print("\npandas not available. Skipping dataset test...")
 
-
-# -------------------------------------------------------------
 # Main test runner
-# -------------------------------------------------------------
 def main():
 
     print("\n" + "="*60)

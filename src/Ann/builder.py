@@ -15,9 +15,7 @@ class ANNBuilder:
     don’t need to manually assemble layer sizes or activation lists.
     """
 
-    # -------------------------------------------------------------
     # Regression network (supports custom activations)
-    # -------------------------------------------------------------
     @staticmethod
     def build_regression_network(
         input_size: int,
@@ -48,9 +46,7 @@ class ANNBuilder:
         architecture = [input_size] + hidden_layers + [1]
         return NeuralNetwork(architecture, activations, seed)
 
-    # -------------------------------------------------------------
     # Binary classification network
-    # -------------------------------------------------------------
     @staticmethod
     def build_binary_classification_network(
         input_size: int,
@@ -65,9 +61,7 @@ class ANNBuilder:
         activations = ['relu'] * len(hidden_layers) + ['sigmoid']
         return NeuralNetwork(architecture, activations, seed)
 
-    # -------------------------------------------------------------
     # Custom network (manual architecture + activations)
-    # -------------------------------------------------------------
     @staticmethod
     def build_custom_network(
         architecture: List[int],
@@ -80,9 +74,7 @@ class ANNBuilder:
         """
         return NeuralNetwork(architecture, activations, seed)
 
-    # -------------------------------------------------------------
     # Deep network (uniform hidden size)
-    # -------------------------------------------------------------
     @staticmethod
     def build_deep_network(
         input_size: int,
@@ -100,10 +92,7 @@ class ANNBuilder:
         return NeuralNetwork(architecture, activations, seed)
 
 
-# -------------------------------------------------------------
 # Convenience functions for quick network creation
-# -------------------------------------------------------------
-
 def create_simple_regression_nn(
     input_size: int,
     hidden_size: int = 10,

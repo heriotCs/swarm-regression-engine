@@ -52,9 +52,7 @@ class Layer:
         # Bias initialised to zeros
         self.b = np.zeros((output_size,), dtype=np.float64)
 
-    # -------------------------------------------------------------
     # Forward pass
-    # -------------------------------------------------------------
     def forward(self, x: np.ndarray) -> np.ndarray:
         """
         Compute forward pass through this layer.
@@ -93,9 +91,7 @@ class Layer:
         # If original input was 1D, return a 1D output for convenience
         return a.squeeze(0) if original_1d else a
 
-    # -------------------------------------------------------------
     # String representation for debugging/printing
-    # -------------------------------------------------------------
     def __repr__(self) -> str:
         return (
             f"Layer(in={self.input_size}, out={self.output_size}, "

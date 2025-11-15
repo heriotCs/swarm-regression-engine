@@ -115,8 +115,6 @@ class PSO:
         c2 = self._lin_schedule(*self.schedule_c2, t) if self.schedule_c2 else self.base_c2
         return chi, c1, c2
 
-    # ---------------------------------------------------------------------
-
     def _maybe_stagnation_reset(self, t: int) -> None:
         """
         Reset some of the worst particles if the swarm hasn't improved for a while.
@@ -145,9 +143,7 @@ class PSO:
                 print(f"[iter {t}] stagnation reset applied.")
             self._last_improvement_iter = t
 
-    # ---------------------------------------------------------------------
-    #                           MAIN OPTIMISER
-    # ---------------------------------------------------------------------
+    # MAIN OPTIMISER
 
     def optimise(self) -> tuple[np.ndarray, float]:
         """Run the full PSO loop and return the best-found position and fitness."""

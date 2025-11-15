@@ -13,11 +13,9 @@ from pso.pso import PSO
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 
-# ------------------------------------------------------------
 # Trainer class that connects the ANN and PSO components.
 # Handles: creating the fitness wrapper, configuring PSO,
 # running optimisation, and evaluating final performance.
-# ------------------------------------------------------------
 class ANNPSOTrainer:
 
     def __init__(
@@ -59,9 +57,7 @@ class ANNPSOTrainer:
         # Will store optimisation results for later inspection
         self.training_history: Dict = {}
 
-    # ------------------------------------------------------------
     # Main PSO training loop for the ANN
-    # ------------------------------------------------------------
     def train(
         self,
         swarm_size: int = 50,
@@ -170,9 +166,7 @@ class ANNPSOTrainer:
 
         return best_weights, best_fitness
 
-    # ------------------------------------------------------------
     # Load the best validation weights back into the model
-    # ------------------------------------------------------------
     def set_to_best_validation(self) -> None:
         if not self.use_validation:
             raise RuntimeError("No validation data was supplied during training.")
@@ -181,9 +175,8 @@ class ANNPSOTrainer:
         self.ann_fitness.decode_weights(best_val_weights)
         print("Network weights restored to best validation performance.")
 
-    # ------------------------------------------------------------
+
     # Compute evaluation metrics on any given dataset
-    # ------------------------------------------------------------
     def evaluate(
         self,
         X: np.ndarray,
@@ -228,9 +221,7 @@ class ANNPSOTrainer:
         print("-" * 40)
 
 
-# ------------------------------------------------------------
 # Minimal example to ensure the trainer works independently
-# ------------------------------------------------------------
 if __name__ == "__main__":
     # Dummy network for quick testing
     network = NeuralNetwork([8, 10, 1], activations=["relu", "linear"])

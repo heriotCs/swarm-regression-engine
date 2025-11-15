@@ -41,9 +41,7 @@ class NeuralNetwork:
         # RNG is stored so all layers share the same seed if provided
         self.rng = np.random.default_rng(seed)
 
-        # -------------------------------------------------------------
         # Build each layer using the Layer class
-        # -------------------------------------------------------------
         self.layers: List[Layer] = []
         for in_size, out_size, act in zip(
             architecture[:-1],
@@ -54,9 +52,7 @@ class NeuralNetwork:
                 Layer(in_size, out_size, act, rng=self.rng)
             )
 
-    # -------------------------------------------------------------
     # Forward pass through the entire network
-    # -------------------------------------------------------------
     def forward(self, x: np.ndarray) -> np.ndarray:
         """
         Apply each layer sequentially. The Layer class handles
@@ -71,9 +67,7 @@ class NeuralNetwork:
     def __call__(self, x: np.ndarray) -> np.ndarray:
         return self.forward(x)
 
-    # -------------------------------------------------------------
     # Simple printed summary for debugging/inspection
-    # -------------------------------------------------------------
     def summary(self) -> None:
         print("=" * 50)
         print("Neural Network Summary")
@@ -84,9 +78,7 @@ class NeuralNetwork:
         print(f"Total layers (excluding input): {len(self.layers)}")
         print("=" * 50)
 
-    # -------------------------------------------------------------
     # Count total trainable parameters
-    # -------------------------------------------------------------
     def get_num_parameters(self) -> int:
         """
         Returns the total number of parameters (weights + biases)

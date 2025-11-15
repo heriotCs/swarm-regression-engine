@@ -4,17 +4,12 @@ from sklearn.preprocessing import StandardScaler
 from pathlib import Path 
 warnings.filterwarnings("ignore")
 
-# -------------------------------------------------------------------
 # Import project modules
-# -------------------------------------------------------------------
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.Ann.builder import ANNBuilder
 from src.AnnPso.annPsoTrainer import ANNPSOTrainer
-# -------------------------------------------------------------------
 
-# ==========================================================
 # Utility helpers
-# ==========================================================
 def load_and_preprocess_data(path="Concrete_Data.xls", test_size=0.3, seed=42):
     df = pd.read_excel(path)
     X, y = df.iloc[:, :-1].values, df.iloc[:, -1].values
@@ -44,11 +39,10 @@ def plot_bar(results, title, xlabel, ylabel, filename):
     ax.grid(axis='y', linestyle='--', alpha=0.5)
     fig.tight_layout(); fig.savefig(f"results/plots/{filename}", dpi=150)
     plt.close(fig)
-    print(f"✅ Plot saved → results/plots/{filename}")
+    print(f"Plot saved → results/plots/{filename}")
 
-# ==========================================================
-# 1️⃣ Architecture investigation
-# ==========================================================
+
+# 1 - Architecture investigation
 def experiment_architecture(Xtr, Xte, ytr, yte, runs=10):
     print("\nEXPERIMENT 1: Architecture Comparison (10-run avg)")
     configs = [([5],"8-5-1"),([10],"8-10-1"),([20],"8-20-1"),
@@ -66,9 +60,7 @@ def experiment_architecture(Xtr, Xte, ytr, yte, runs=10):
     plot_bar(results,"Effect of ANN Architecture","Architecture","Test MSE","arch_effect.png")
     return results
 
-# ==========================================================
-# 2️⃣ Swarm vs Iteration allocation
-# ==========================================================
+# 2 - Swarm vs Iteration allocation
 def experiment_swarm_iter(Xtr,Xte,ytr,yte,runs=10):
     print("\nEXPERIMENT 2: Swarm × Iterations (10-run avg)")
     configs=[(10,100),(20,50),(50,20),(100,10)]
@@ -86,9 +78,8 @@ def experiment_swarm_iter(Xtr,Xte,ytr,yte,runs=10):
     plot_bar(results,"Swarm × Iterations (Budget = 1000)","Config","Test MSE","swarm_iter.png")
     return results
 
-# ==========================================================
-# 3️⃣ Acceleration coefficients c1 / c2
-# ==========================================================
+
+# 3 - Acceleration coefficients c1 / c2
 def experiment_c1c2(Xtr,Xte,ytr,yte,runs=10):
     print("\nEXPERIMENT 3: Acceleration Coefficients (10-run avg)")
     configs=[(2.5,0.5,"Exploration"),(2,1,"Cognitive"),(1.5,1.5,"Balanced"),
@@ -107,9 +98,7 @@ def experiment_c1c2(Xtr,Xte,ytr,yte,runs=10):
     plot_bar(results,"Effect of c₁ and c₂","Strategy","Test MSE","c1c2_effect.png")
     return results
 
-# ==========================================================
-# 4️⃣ PSO Topology
-# ==========================================================
+# 4 - PSO Topology
 def experiment_topology(Xtr,Xte,ytr,yte,runs=10):
     print("\nEXPERIMENT 4: PSO Topology (10-run avg)")
     topologies=["random","ring","fully_informed"]
@@ -127,9 +116,7 @@ def experiment_topology(Xtr,Xte,ytr,yte,runs=10):
     plot_bar(results,"Effect of PSO Topology","Topology","Test MSE","topology.png")
     return results
 
-# ==========================================================
-# 5️⃣ Design decisions – Activation + Boundary Handling
-# ==========================================================
+# 5 - Design decisions – Activation + Boundary Handling
 def experiment_design_decisions(Xtr, Xte, ytr, yte, runs=10):
     print("\nEXPERIMENT 5: Design Decisions (Activation × Boundary)")
     activations = ["relu", "tanh", "sigmoid"]
@@ -144,7 +131,7 @@ def experiment_design_decisions(Xtr, Xte, ytr, yte, runs=10):
     for act in activations:
         for b in boundaries:
             def one_run():
-                # ✅ pass activation as list
+                # pass activation as list
                 kwargs = {arg_name: [act]}
                 net = ANNBuilder.build_regression_network(8, [10], **kwargs)
                 tr = ANNPSOTrainer(net, Xtr, ytr, Xte, yte, metric="mse")
@@ -165,9 +152,7 @@ def experiment_design_decisions(Xtr, Xte, ytr, yte, runs=10):
 
     return results
 
-# ==========================================================
 # Main runner
-# ==========================================================
 def main():
     os.makedirs("results",exist_ok=True)
     Xtr,Xte,ytr,yte=load_and_preprocess_data()
@@ -179,7 +164,7 @@ def main():
     allres["design"]=experiment_design_decisions(Xtr,Xte,ytr,yte)
     pd.concat({k:pd.DataFrame(v,columns=["Config","MeanMSE","Std"])
                for k,v in allres.items()}).to_csv("results/task5_summary.csv")
-    print("\n✅ All experiments complete → results/task5_summary.csv\n")
+    print("\n All experiments complete → results/task5_summary.csv\n")
 
 if __name__=="__main__":
     main()
