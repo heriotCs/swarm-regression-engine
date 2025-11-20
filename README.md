@@ -277,5 +277,5 @@ All experiment outputs are stored in the `results` directory:
 
 ---
 
-*Last Updated: November 2025*
+*Last Updated: 20th November 2025*
 *Coursework for F20BC - Biologically-Inspired Computation*
