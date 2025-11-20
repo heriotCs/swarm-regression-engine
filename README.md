@@ -267,11 +267,13 @@ python3 experiments/trainOnConcrete.py
 Expected: 5 experiments complete, plots saved, CSV generated
 
 # 4. Check results
-ls Results/plots/
+All experiment outputs are stored in the `results` directory:
 
+- **Plots** are saved in:
+  results/plots
 
-ls Results/*.csv
-```
+- **Performance metrics (MAE, R², architectures, Adam baseline)** are saved in:
+  results/metrics.csv
 
 ---
 
