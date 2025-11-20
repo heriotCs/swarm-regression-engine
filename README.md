@@ -45,8 +45,11 @@ Test PSO on benchmark functions (Task 2)
 
 2. Run Main Experiment (Tasks 3-5)
 
-Train PSO-ANN on concrete dataset with full experimental study
-"python3 experiments/trainOnConcrete.py"
+Train the PSO–ANN on the concrete dataset with the full experimental setup.
+
+Important: To run the main experiment, first change into the experiments directory.
+cd experiments
+python3 trainOnConcrete.py # run the main experiments
 
 
 This will:
@@ -212,16 +215,16 @@ This project was developed with assistance from GitHub Copilot for:
 
 ## Team Contributions
 
-### Student 1: Muhammad H
+### Student 1: Muhammad Hassan
 - ANN implementation (network.py, layer.py, activation.py)
 - PSO-ANN coupling (annFitness.py, annPsoTrainer.py)
 - Experimental investigations 4 and 5
-- Report sections: Implementation
+- Report sections: Results & Discussion
 
 ### Student 2: Saad Noman
 - PSO implementation (pso.py, particle.py, informants.py)
 - Experimental investigations 1-3
-- Report sections: Results, Discussion, Conclusions
+- Report sections: Implementation
 
 
 ---
