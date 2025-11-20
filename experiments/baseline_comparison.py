@@ -60,7 +60,7 @@ def save_plot(fig, filename):
     path = f"results/plots/{filename}"
     fig.savefig(path, bbox_inches="tight", dpi=200)
     plt.close(fig)
-    print(f"✅ Saved plot -> {path}")
+    print(f"Saved plot -> {path}")
 
 
 # Runs a single, detailed PSO+ANN experiment (baseline model)

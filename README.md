@@ -48,6 +48,7 @@ Test PSO on benchmark functions (Task 2)
 Train the PSO–ANN on the concrete dataset with the full experimental setup.
 
 Important: To run the main experiment, first change into the experiments directory.
+
 cd experiments
 python3 trainOnConcrete.py # run the main experiments
 
@@ -55,8 +56,17 @@ python3 trainOnConcrete.py # run the main experiments
 This will:
 - Load and preprocess the concrete dataset (70/30 train/test split)
 - Run all 5 experimental investigations with 10-run averages
-- Generate result plots in "results/plots/"
-- Save summary CSV in "results/"
+- Generate result plots in "experiments/results/plots/"
+- Save summary CSV in "experiments/results/"
+
+3. Run Baseline Comaprison (PSO vs Adam Backwardpropagation)
+
+This script trains multiple ANN architectures using PSO and also trains a baseline MLP using the Adam optimizer.
+It prints full training logs, saves plots, and writes all metrics to results/metrics.csv.
+
+To run:
+cd experiments
+python3 basline_comparison.py
 
 #### 3. Train with Custom Parameters
 ```python
