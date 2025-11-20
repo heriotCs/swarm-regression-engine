@@ -49,8 +49,9 @@ Train the PSO–ANN on the concrete dataset with the full experimental setup.
 
 Important: To run the main experiment, first change into the experiments directory.
 
-cd experiments
-python3 trainOnConcrete.py # run the main experiments
+"cd experiments"
+
+"python3 trainOnConcrete.py" # run the main experiments
 
 
 This will:
@@ -65,8 +66,9 @@ This script trains multiple ANN architectures using PSO and also trains a baseli
 It prints full training logs, saves plots, and writes all metrics to results/metrics.csv.
 
 To run:
-cd experiments
-python3 basline_comparison.py
+"cd experiments"
+
+"python3 basline_comparison.py"
 
 #### 3. Train with Custom Parameters
 ```python
